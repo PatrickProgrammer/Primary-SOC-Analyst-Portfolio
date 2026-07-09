@@ -1,0 +1,49 @@
+{
+  "workflow_name": "SIEM SOAR Alert Enrichment and Ticketing",
+  "sanitized": true,
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "trigger",
+      "purpose": "Receive Wazuh alert JSON"
+    },
+    {
+      "name": "Normalization",
+      "type": "transform",
+      "purpose": "Extract and standardize triage fields"
+    },
+    {
+      "name": "Severity Gate",
+      "type": "condition",
+      "purpose": "Escalate high-severity alerts"
+    },
+    {
+      "name": "Hash Exists",
+      "type": "condition",
+      "purpose": "Route hash-based alerts to enrichment"
+    },
+    {
+      "name": "VirusTotal",
+      "type": "api",
+      "purpose": "Query file-hash reputation"
+    },
+    {
+      "name": "Malicious Gate",
+      "type": "condition",
+      "purpose": "Create ticket if malicious signal exists"
+    },
+    {
+      "name": "Jira Ticket",
+      "type": "action",
+      "purpose": "Create analyst triage ticket"
+    }
+  ],
+  "escalation_conditions": [
+    "severity >= 10",
+    "sha256 exists and virustotal.malicious > 0"
+  ],
+  "suppression_conditions": [
+    "low severity with no enrichment context",
+    "hash enrichment returns no malicious signal"
+  ]
+}

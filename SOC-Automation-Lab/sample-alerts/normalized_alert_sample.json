@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-01-01T00:00:00Z",
+  "severity": 15,
+  "rule_id": "92213",
+  "description": "Executable file dropped in folder commonly used by malware",
+  "hostname": "WIN-ENDPOINT-01",
+  "source_ip": "10.0.0.10",
+  "event_type": [
+    "windows",
+    "sysmon",
+    "file_event"
+  ],
+  "event_id": "11",
+  "username": "LAB\\analyst",
+  "process": "C:\\Windows\\System32\\sdiagnhost.exe",
+  "file_path": "C:\\Users\\Public\\sample_payload.ps1",
+  "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "threat_intel_verdict": {
+    "source": "VirusTotal",
+    "malicious": 1,
+    "suspicious": 0,
+    "note": "Sanitized example result"
+  }
+}
